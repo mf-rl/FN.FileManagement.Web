@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'http://localhost/FN.Testing.WebApi/api'
+  apiBaseUrl: 'https://localhost:44314/api/'
 };

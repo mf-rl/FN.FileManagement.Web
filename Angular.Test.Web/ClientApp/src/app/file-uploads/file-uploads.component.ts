@@ -23,19 +23,42 @@ export class FileUploadsComponent implements OnInit {
   uploadProgress = 0;
   uploading = false;
   uploadResult: UploadResult | undefined;
+  serviceStatus: 'checking' | 'connected' | 'disconnected' = 'checking';
+  serviceErrorMessage = '';
   constructor(private http: HttpClient) {
-    this.LoadData();
   }
-  ngOnInit() { }
+  ngOnInit() {
+    this.checkServiceConnection();
+  }
+  
+  checkServiceConnection() {
+    this.serviceStatus = 'checking';
+    this.http.get<FileUploads[]>(`${this.apiBaseUrl}Uploads`).subscribe({
+      next: (result) => {
+        this.serviceStatus = 'connected';
+        this.fileUploads = result;
+        this.serviceErrorMessage = '';
+      },
+      error: (error) => {
+        this.serviceStatus = 'disconnected';
+        if (error.status === 0) {
+          this.serviceErrorMessage = 'Unable to connect to the file management service. Please ensure the service is running at ' + this.apiBaseUrl;
+        } else {
+          this.serviceErrorMessage = `Error connecting to service: ${error.status} - ${error.statusText}`;
+        }
+        console.error('Service connection error:', error);
+      }
+    });
+  }
   downloadFile(id: number) {
-    const url = `${this.apiBaseUrl}/Uploads/download/${id}`;
+    const url = `${this.apiBaseUrl}Uploads/download/${id}`;
     window.open(url, '_blank');
   }
   deleteFile(id: number) {
     if (confirm("Delete file?")) {
       const req = new HttpRequest(
         'DELETE',
-        `${this.apiBaseUrl}/Uploads/${id}`,
+        `${this.apiBaseUrl}Uploads/${id}`,
         null,
         {
           reportProgress: true,
@@ -64,9 +87,20 @@ export class FileUploadsComponent implements OnInit {
     }    
   }
   LoadData() {
-    this.http.get<FileUploads[]>(`${this.apiBaseUrl}/Uploads`).subscribe(result => {
-      this.fileUploads = result;
-    }, error => console.error(error));
+    if (this.serviceStatus === 'disconnected') {
+      this.checkServiceConnection();
+      return;
+    }
+    this.http.get<FileUploads[]>(`${this.apiBaseUrl}Uploads`).subscribe({
+      next: (result) => {
+        this.fileUploads = result;
+      },
+      error: (error) => {
+        this.serviceStatus = 'disconnected';
+        this.serviceErrorMessage = 'Failed to load uploads. Service may be unavailable.';
+        console.error(error);
+      }
+    });
   }
   chooseFile(files: FileList | null) {
     this.selectedFile = null;
@@ -100,7 +134,7 @@ export class FileUploadsComponent implements OnInit {
 
     const req = new HttpRequest(
       'POST',
-      `${this.apiBaseUrl}/Uploads/`,
+      `${this.apiBaseUrl}Uploads`,
       formData,
       {
         reportProgress: true,

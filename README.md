@@ -38,7 +38,7 @@ Default configuration:
 ```typescript
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost/FN.Testing.WebApi/api'
+  apiBaseUrl: 'https://localhost:44314/api/'
 };
 ```
 

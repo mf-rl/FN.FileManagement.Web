@@ -1,6 +1,24 @@
 <h1 id="tableLabel">Uploads List</h1>
 
-<p *ngIf="!fileUploads"><em>Loading...</em></p>
+<!-- Service Connection Status -->
+<div *ngIf="serviceStatus === 'checking'" class="alert alert-info" role="alert">
+  <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+  Checking connection to file management service...
+</div>
+
+<div *ngIf="serviceStatus === 'connected'" class="alert alert-success" role="alert">
+  <strong>✓ Connected</strong> - File management service is available
+</div>
+
+<div *ngIf="serviceStatus === 'disconnected'" class="alert alert-danger" role="alert">
+  <strong>✗ Service Unavailable</strong><br>
+  {{ serviceErrorMessage }}<br>
+  <button class="btn btn-sm btn-outline-danger mt-2" (click)="checkServiceConnection()">
+    Retry Connection
+  </button>
+</div>
+
+<p *ngIf="!fileUploads && serviceStatus === 'connected'"><em>Loading...</em></p>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="fileUploads">
   <thead>
