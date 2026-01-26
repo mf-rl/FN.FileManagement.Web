@@ -26,7 +26,7 @@
 </table>
 
 <div class="my-2">
-  <label class="btn btn-secondary" (click)="fileInput.value = null">
+  <label class="btn btn-secondary" (click)="fileInput.value = ''">
     Choose File
     <input #fileInput
            type="file"
@@ -43,7 +43,7 @@
   </div>
   <div *ngIf="uploading" class="mt-2">
     <ngb-progressbar type="success"
-                     showValue="true"
+                     [showValue]="true"
                      [value]="uploadProgress"></ngb-progressbar>
   </div>
   <button type="button"
@@ -51,7 +51,7 @@
           (click)="upload()"
           [disabled]="uploading">
     <span *ngIf="!uploading">Upload</span>
-    <span *ngIf="uploading"> Processing <loading-bar></loading-bar></span>
+    <span *ngIf="uploading"> Processing...</span>
   </button>
 </div>
 

@@ -6,12 +6,13 @@ import {
   HttpEventType,
   HttpResponse, } from '@angular/common/http';
 import { finalize } from 'rxjs/operators';
+import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 interface UploadResult { }
 @Component({
   selector: 'app-file-uploads',
   templateUrl: './file-uploads.component.html',
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, NgbProgressbarModule]
 })
 export class FileUploadsComponent implements OnInit {
   public fileUploads: FileUploads[] = [];
@@ -48,7 +49,7 @@ export class FileUploadsComponent implements OnInit {
         )
         .subscribe(
           (event) => {
-            if (event.type === HttpEventType.UploadProgress) {
+            if (event.type === HttpEventType.UploadProgress && event.total) {
               this.uploadProgress = Math.round(
                 (100 * event.loaded) / event.total
               );
@@ -65,11 +66,11 @@ export class FileUploadsComponent implements OnInit {
       this.fileUploads = result;
     }, error => console.error(error));
   }
-  chooseFile(files: FileList) {
+  chooseFile(files: FileList | null) {
     this.selectedFile = null;
     this.errorMsg = '';
     this.uploadProgress = 0;
-    if (files.length === 0) {
+    if (!files || files.length === 0) {
       return;
     }
     this.selectedFile = files[0];
@@ -115,12 +116,12 @@ export class FileUploadsComponent implements OnInit {
       )
       .subscribe(
         (event) => {
-          if (event.type === HttpEventType.UploadProgress) {
+          if (event.type === HttpEventType.UploadProgress && event.total) {
             this.uploadProgress = Math.round(
               (100 * event.loaded) / event.total
             );
           } else if (event instanceof HttpResponse) {
-            this.uploadResult = event.body;
+            this.uploadResult = event.body ?? undefined;
           }
         },
         (error) => {
