@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   HttpClient,
   HttpRequest,
@@ -8,15 +9,17 @@ import { finalize } from 'rxjs/operators';
 interface UploadResult { }
 @Component({
   selector: 'app-file-uploads',
-  templateUrl: './file-uploads.component.html'
+  templateUrl: './file-uploads.component.html',
+  standalone: true,
+  imports: [CommonModule]
 })
 export class FileUploadsComponent implements OnInit {
-  public fileUploads: FileUploads[];
-  selectedFile: File;
+  public fileUploads: FileUploads[] = [];
+  selectedFile: File | null = null;
   errorMsg = '';
   uploadProgress = 0;
   uploading = false;
-  uploadResult: UploadResult;
+  uploadResult: UploadResult | undefined;
   constructor(private http: HttpClient) {
     this.LoadData();
   }
