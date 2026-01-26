@@ -26,7 +26,23 @@ The application features:
 
 **Important**: This application requires the backend file management service to be running:
 - **Service Repository**: [FN.FileManagement](https://github.com/mf-rl/FN.FileManagement)
-- The file upload/download features depend on this API service being available at `http://localhost/FN.Testing.WebApi/api/Uploads`
+- The file upload/download features depend on this API service being available at the configured API base URL
+
+### Configure API Base URL
+
+The API base URL is configured in the Angular environment files:
+- **Development**: `ClientApp/src/environments/environment.ts`
+- **Production**: `ClientApp/src/environments/environment.prod.ts`
+
+Default configuration:
+```typescript
+export const environment = {
+  production: false,
+  apiBaseUrl: 'http://localhost/FN.Testing.WebApi/api'
+};
+```
+
+Update the `apiBaseUrl` property to match your FN.FileManagement service deployment.
 
 ## Getting Started
 

@@ -7,6 +7,7 @@ import {
   HttpResponse, } from '@angular/common/http';
 import { finalize } from 'rxjs/operators';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../environments/environment';
 interface UploadResult { }
 @Component({
   selector: 'app-file-uploads',
@@ -15,6 +16,7 @@ interface UploadResult { }
   imports: [CommonModule, NgbProgressbarModule]
 })
 export class FileUploadsComponent implements OnInit {
+  private apiBaseUrl = environment.apiBaseUrl;
   public fileUploads: FileUploads[] = [];
   selectedFile: File | null = null;
   errorMsg = '';
@@ -26,14 +28,14 @@ export class FileUploadsComponent implements OnInit {
   }
   ngOnInit() { }
   downloadFile(id: number) {
-    const url = 'http://localhost/FN.Testing.WebApi/api/Uploads/download/' + id.toString();
+    const url = `${this.apiBaseUrl}/Uploads/download/${id}`;
     window.open(url, '_blank');
   }
   deleteFile(id: number) {
     if (confirm("Delete file?")) {
       const req = new HttpRequest(
         'DELETE',
-        'http://localhost/FN.Testing.WebApi/api/Uploads/' + id.toString(),
+        `${this.apiBaseUrl}/Uploads/${id}`,
         null,
         {
           reportProgress: true,
@@ -62,7 +64,7 @@ export class FileUploadsComponent implements OnInit {
     }    
   }
   LoadData() {
-    this.http.get<FileUploads[]>('http://localhost/FN.Testing.WebApi/api/Uploads').subscribe(result => {
+    this.http.get<FileUploads[]>(`${this.apiBaseUrl}/Uploads`).subscribe(result => {
       this.fileUploads = result;
     }, error => console.error(error));
   }
@@ -98,7 +100,7 @@ export class FileUploadsComponent implements OnInit {
 
     const req = new HttpRequest(
       'POST',
-      'http://localhost/FN.Testing.WebApi/api/Uploads/',
+      `${this.apiBaseUrl}/Uploads/`,
       formData,
       {
         reportProgress: true,
