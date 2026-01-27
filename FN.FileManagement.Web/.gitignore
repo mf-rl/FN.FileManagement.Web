@@ -1,0 +1,21 @@
+############################
+# Angular (ClientApp)
+############################
+FN.FileManagement.Web/ClientApp/node_modules/
+FN.FileManagement.Web/ClientApp/dist/
+FN.FileManagement.Web/ClientApp/out-tsc/
+FN.FileManagement.Web/ClientApp/.angular/
+
+############################
+# .NET
+############################
+**/bin/
+**/obj/
+**/publish/
+
+############################
+# IDEs
+############################
+.vs/
+.vscode/
+.idea/

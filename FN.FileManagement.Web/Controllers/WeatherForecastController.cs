@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Angular.Test.Web.Controllers
+namespace FN.FileManagement.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]

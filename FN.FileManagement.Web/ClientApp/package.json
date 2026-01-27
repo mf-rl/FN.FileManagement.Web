@@ -1,11 +1,11 @@
 {
-  "name": "angular.test.web",
+  "name": "FN.FileManagement.Web",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "echo hello  && ng serve --host 0.0.0.0 ",
     "build": "ng build",
-    "build:ssr": "ng run Angular.Test.Web:server:dev",
+    "build:ssr": "ng run FN.FileManagement.Web:server:dev",
     "test": "ng test",
     "lint": "ng lint", 
     "e2e": "ng e2e"

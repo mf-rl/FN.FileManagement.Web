@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Angular.Test.Web": {
+    "FN.FileManagement.Web": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -53,10 +53,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Angular.Test.Web:build:production"
+              "buildTarget": "FN.FileManagement.Web:build:production"
             },
             "development": {
-              "buildTarget": "Angular.Test.Web:build:development"
+              "buildTarget": "FN.FileManagement.Web:build:development"
             }
           },
           "defaultConfiguration": "development"

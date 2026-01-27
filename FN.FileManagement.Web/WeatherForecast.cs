@@ -1,6 +1,6 @@
 using System;
 
-namespace Angular.Test.Web
+namespace FN.FileManagement.Web
 {
     public class WeatherForecast
     {

@@ -1,4 +1,4 @@
-# Angular.Test.Web
+# FN.FileManagement.Web
 
 A modern ASP.NET Core web application with Angular frontend, demonstrating file upload/download functionality and weather forecast data visualization.
 
@@ -49,14 +49,14 @@ Update the `apiBaseUrl` property to match your FN.FileManagement service deploym
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/mf-rl/Angular.Test.Web.git
-cd Angular.Test.Web
+git clone https://github.com/mf-rl/FN.FileManagement.Web.git
+cd FN.FileManagement.Web
 ```
 
 ### 2. Install Dependencies
 
 ```bash
-cd Angular.Test.Web/ClientApp
+cd FN.FileManagement.Web/ClientApp
 npm install
 cd ../..
 ```
@@ -67,14 +67,14 @@ cd ../..
 
 **Terminal 1 - Start Angular Dev Server:**
 ```bash
-cd Angular.Test.Web/ClientApp
+cd FN.FileManagement.Web/ClientApp
 npm start
 ```
 The Angular app will be available at http://localhost:4200
 
 **Terminal 2 - Start .NET Backend:**
 ```bash
-cd Angular.Test.Web
+cd FN.FileManagement.Web
 dotnet run
 ```
 The .NET backend will be available at:
@@ -86,7 +86,7 @@ When both are running, navigate to **https://localhost:5001** to access the full
 #### Option B: Production Build
 
 ```bash
-cd Angular.Test.Web/ClientApp
+cd FN.FileManagement.Web/ClientApp
 npm run build
 cd ..
 dotnet run
@@ -102,8 +102,8 @@ dotnet dev-certs https --trust
 ## Project Structure
 
 ```
-Angular.Test.Web/
-├── Angular.Test.Web/              # ASP.NET Core Backend
+FN.FileManagement.Web/
+├── FN.FileManagement.Web/              # ASP.NET Core Backend
 │   ├── Controllers/               # API Controllers
 │   │   └── WeatherForecastController.cs
 │   ├── Pages/                     # Razor Pages
@@ -122,7 +122,7 @@ Angular.Test.Web/
 │   │   ├── package.json           # npm dependencies
 │   │   └── tsconfig.json          # TypeScript configuration
 │   ├── Program.cs                 # Application entry point
-│   └── Angular.Test.Web.csproj    # Project file
+│   └── FN.FileManagement.Web.csproj    # Project file
 └── README.md
 ```
 
@@ -227,21 +227,21 @@ Angular.Test.Web/
 ### Run Tests
 
 ```bash
-cd Angular.Test.Web/ClientApp
+cd FN.FileManagement.Web/ClientApp
 npm test
 ```
 
 ### Lint
 
 ```bash
-cd Angular.Test.Web/ClientApp
+cd FN.FileManagement.Web/ClientApp
 npm run lint
 ```
 
 ### Build for Production
 
 ```bash
-cd Angular.Test.Web/ClientApp
+cd FN.FileManagement.Web/ClientApp
 npm run build
 ```
 
