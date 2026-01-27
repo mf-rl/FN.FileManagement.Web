@@ -5,6 +5,7 @@ FN.FileManagement.Web/ClientApp/node_modules/
 FN.FileManagement.Web/ClientApp/dist/
 FN.FileManagement.Web/ClientApp/out-tsc/
 FN.FileManagement.Web/ClientApp/.angular/
+FN.FileManagement.Web/ClientApp/.angular/cache/
 
 ############################
 # .NET
